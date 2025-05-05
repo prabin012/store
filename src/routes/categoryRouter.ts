@@ -18,6 +18,6 @@ router.post("/createItem", createItem);
 router.get("/users", GetAllUsers);
 router.post("/createUser", createUser);
 router.post("/updateUserAccount", addSalaryRecord);
-router.get("/allItmes", GetAllItems);
+router.get("/getItems", GetAllItems);
 
 export default router;
