@@ -9,6 +9,10 @@ import {
   GetAllUsers,
 } from "../controllers/users/user";
 import { createItem, GetAllItems } from "../controllers/items/items";
+import {
+  createTableBilling,
+  getFilteredTableBillings,
+} from "../controllers/billings";
 
 const router = express.Router();
 
@@ -19,5 +23,7 @@ router.get("/users", GetAllUsers);
 router.post("/createUser", createUser);
 router.post("/updateUserAccount", addSalaryRecord);
 router.get("/getItems", GetAllItems);
+router.post("/addBilling", createTableBilling);
+router.post("/getBillings", getFilteredTableBillings);
 
 export default router;
