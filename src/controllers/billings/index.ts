@@ -64,7 +64,7 @@ export const getFilteredTableBillings = async (req: Request, res: Response) => {
 
     const result = await TableModel.find(filter).sort({ createdAt: -1 });
 
-    res.status(200).json({ data: result });
+    res.status(200).json({ getBillings: result });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to filter billings", error });
