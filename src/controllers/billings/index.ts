@@ -12,6 +12,7 @@ export const createTableBilling = async (req: Request, res: Response) => {
       paymentMethod,
       isPaid,
       isCompletedBilling,
+      tableNo,
     } = req.body;
 
     const newTable = new TableModel({
@@ -23,10 +24,13 @@ export const createTableBilling = async (req: Request, res: Response) => {
       paymentMethod,
       isPaid,
       isCompletedBilling,
+      tableNo,
     });
-
+    console.log(newTable);
     const saved = await newTable.save();
     res.status(201).json({ message: "Table billing saved", data: saved });
+    console.log(tableNo);
+    console.log(isCompletedBilling);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to save billing", error });
@@ -52,7 +56,6 @@ export const getFilteredTableBillings = async (req: Request, res: Response) => {
     }
 
     if (typeof date === "string") {
-      // Create UTC 00:00:00 for start of the day
       const startOfDay = new Date(date + "T00:00:00.000Z");
       const endOfDay = new Date(date + "T00:00:00.000Z");
       endOfDay.setUTCDate(endOfDay.getUTCDate() + 1);

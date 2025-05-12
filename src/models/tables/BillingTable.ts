@@ -17,6 +17,7 @@ export interface TableDocument extends Document {
   isPaid: boolean;
   isCompletedBilling: boolean;
   createdAt: Date;
+  tableNo: string;
   updatedAt: Date;
 }
 
@@ -40,6 +41,7 @@ const TableSchema = new Schema<TableDocument>(
     paymentMethod: { type: String, default: null },
     isPaid: { type: Boolean, default: false },
     isCompletedBilling: { type: Boolean, default: false },
+    tableNo: { type: String, default: "1" },
   },
   { timestamps: true }
 );
