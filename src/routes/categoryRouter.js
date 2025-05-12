@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const category_1 = require("../controllers/category/category");
+const user_1 = require("../controllers/users/user");
+const items_1 = require("../controllers/items/items");
+const billings_1 = require("../controllers/billings");
+const router = express_1.default.Router();
+router.post("/createCategory", category_1.CreateCategory);
+router.get("/getCategory", category_1.GetAllCategory);
+router.post("/createItem", items_1.createItem);
+router.get("/users", user_1.GetAllUsers);
+router.post("/createUser", user_1.createUser);
+router.post("/updateUserAccount", user_1.addSalaryRecord);
+router.get("/getItems", items_1.GetAllItems);
+router.post("/addBilling", billings_1.createTableBilling);
+router.post("/getBillings", billings_1.getFilteredTableBillings);
+exports.default = router;
