@@ -35,12 +35,12 @@ export const createTableBilling = async (req: Request, res: Response) => {
 
 export const getFilteredTableBillings = async (req: Request, res: Response) => {
   try {
-    const { date, isPaid, name, phoneNumber } = req.query;
+    const { date, isPaid, name, phoneNumber } = req.body;
 
     const filter: any = {};
 
     if (typeof name === "string") {
-      filter.name = { $regex: name, $options: "i" }; // case-insensitive
+      filter.name = { $regex: name, $options: "i" };
     }
 
     if (typeof phoneNumber === "string") {
@@ -52,17 +52,21 @@ export const getFilteredTableBillings = async (req: Request, res: Response) => {
     }
 
     if (typeof date === "string") {
-      const targetDate = new Date(date);
-      const nextDay = new Date(targetDate);
-      nextDay.setDate(nextDay.getDate() + 1);
+      // Create UTC 00:00:00 for start of the day
+      const startOfDay = new Date(date + "T00:00:00.000Z");
+      const endOfDay = new Date(date + "T00:00:00.000Z");
+      endOfDay.setUTCDate(endOfDay.getUTCDate() + 1);
 
       filter.createdAt = {
-        $gte: targetDate,
-        $lt: nextDay,
+        $gte: startOfDay,
+        $lt: endOfDay,
       };
     }
+    console.log(date);
+    console.log(filter);
 
     const result = await TableModel.find(filter).sort({ createdAt: -1 });
+    console.log(result);
 
     res.status(200).json({ getBillings: result });
   } catch (error) {
