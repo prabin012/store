@@ -8,3 +8,11 @@ export interface IItem {
   description?: string;
   imageUrl?: string;
 }
+
+interface IReservation extends Document {
+  customerName: string;
+  tableNumber: number;
+  date: Date;
+  time: string;
+  status: "reserved" | "cancelled" | "completed";
+}
