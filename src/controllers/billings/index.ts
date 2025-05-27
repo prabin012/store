@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { TableModel } from "../../models/tables/BillingTable";
+import { ItemModel } from "../../models/items/items.model";
 
-export const createTableBilling = async (req: Request, res: Response) => {
+export const createTableBilling = async (req: Request, res: any) => {
   try {
     const {
       name,
@@ -15,6 +16,31 @@ export const createTableBilling = async (req: Request, res: Response) => {
       tableNo,
     } = req.body;
 
+    console.log(items);
+
+    if (!Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ message: "No items provided for billing" });
+    }
+
+    for (const item of items) {
+      const stockItem = await ItemModel.findOne({ id: item.id });
+
+      if (!stockItem) {
+        return res
+          .status(404)
+          .json({ message: `Stock item not found: ${item.name}` });
+      }
+
+      if (stockItem.quantity < item.quantity) {
+        return res
+          .status(400)
+          .json({ message: `Not enough stock for item: ${item.name}` });
+      }
+
+      stockItem.quantity -= item.quantity;
+      await stockItem.save();
+    }
+
     const newTable = new TableModel({
       name,
       address,
@@ -26,14 +52,19 @@ export const createTableBilling = async (req: Request, res: Response) => {
       isCompletedBilling,
       tableNo,
     });
-    console.log(newTable);
+
     const saved = await newTable.save();
-    res.status(201).json({ message: "Table billing saved", data: saved });
-    console.log(tableNo);
-    console.log(isCompletedBilling);
+
+    res.status(201).json({
+      message: "Table billing saved successfully",
+      data: saved,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to save billing", error });
+    console.error("Billing error:", error);
+    res.status(500).json({
+      message: "Failed to save billing",
+      error: error instanceof Error ? error.message : String(error),
+    });
   }
 };
 
