@@ -24,6 +24,7 @@ export const createTableBilling = async (req: Request, res: any) => {
 
     for (const item of items) {
       const stockItem = await ItemModel.findById(item.id);
+      console.log(stockItem);
 
       if (!stockItem) {
         return res
