@@ -23,7 +23,7 @@ export const createTableBilling = async (req: Request, res: any) => {
     }
 
     for (const item of items) {
-      const stockItem = await ItemModel.findOne({ id: item.id });
+      const stockItem = await ItemModel.findById(item.id);
 
       if (!stockItem) {
         return res
