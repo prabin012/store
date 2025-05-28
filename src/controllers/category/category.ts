@@ -43,7 +43,7 @@ export const GetAllCategory = async (
   try {
     const getCategory = await CategoryModel.find();
     if (!getCategory || getCategory.length === 0) {
-      res.status(404).json({ message: "No categories found." });
+      res.status(404).json({ message: "No categorie found." });
       return;
     }
     res.status(200).json({ getCategory });
