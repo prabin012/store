@@ -101,6 +101,6 @@ export const DeleteCategory = async (
     });
   } catch (error) {
     console.error("DeleteCategory error:", error);
-    res.status(500).json({ message: "Internal server error." });
+    res.status(500).json({ message: "Internal server error.." });
   }
 };
