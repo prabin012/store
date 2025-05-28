@@ -63,7 +63,7 @@ export const UpdateCategory = async (
 
     const category = await CategoryModel.findById(id);
     if (!category) {
-      res.status(404).json({ message: "Category not found." });
+      res.status(404).json({ message: "Category not found.." });
       return;
     }
 
