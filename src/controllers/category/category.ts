@@ -49,7 +49,7 @@ export const GetAllCategory = async (
     res.status(200).json({ getCategory });
   } catch (error) {
     console.error("Error fetching categories:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error." });
   }
 };
 
