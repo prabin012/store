@@ -91,7 +91,7 @@ export const DeleteCategory = async (
 
     const category = await CategoryModel.findByIdAndDelete(id);
     if (!category) {
-      res.status(404).json({ message: "Category not found." });
+      res.status(404).json({ message: "Category not found.." });
       return;
     }
 
