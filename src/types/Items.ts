@@ -16,3 +16,16 @@ interface IReservation extends Document {
   time: string;
   status: "reserved" | "cancelled" | "completed";
 }
+export interface IOrderItem {
+  item: Types.ObjectId;
+  quantity: number;
+  price: number;
+}
+
+export interface IOrder extends Document {
+  items: IOrderItem[];
+  customerName: string;
+  status: "pending" | "completed" | "cancelled";
+  totalAmount: number;
+  createdAt: Date;
+}

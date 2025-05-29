@@ -16,8 +16,6 @@ export const createTableBilling = async (req: Request, res: any) => {
       tableNo,
     } = req.body;
 
-    console.log(items);
-
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ message: "No items provided for billing" });
     }
@@ -28,6 +26,7 @@ export const createTableBilling = async (req: Request, res: any) => {
 
       if (!stockItem) {
         return res
+
           .status(404)
           .json({ message: `Stock item not found: ${item.name}` });
       }

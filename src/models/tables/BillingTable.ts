@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import mongoose, { Schema, model, Document } from "mongoose";
 
 interface Item {
   id: number;
@@ -31,17 +31,28 @@ const ItemSchema = new Schema<Item>(
   { _id: false }
 );
 
-const TableSchema = new Schema<TableDocument>(
+const TableSchema = new mongoose.Schema(
   {
-    name: { type: String },
-    address: { type: String },
-    phoneNumber: { type: String },
-    items: { type: [ItemSchema], required: true },
-    paidAmount: { type: Number, default: 0 },
-    paymentMethod: { type: String, default: null },
-    isPaid: { type: Boolean, default: false },
-    isCompletedBilling: { type: Boolean, default: false },
-    tableNo: { type: String, default: "1" },
+    name: String,
+    address: String,
+    phoneNumber: String,
+    tableNo: Number,
+    paidAmount: Number,
+    paymentMethod: String,
+    isPaid: Boolean,
+    isCompletedBilling: Boolean,
+    items: [
+      {
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Item",
+          required: true,
+        },
+        name: String,
+        price: Number,
+        quantity: Number,
+      },
+    ],
   },
   { timestamps: true }
 );
