@@ -8,7 +8,12 @@ import {
   createUser,
   GetAllUsers,
 } from "../controllers/users/user";
-import { createItem, GetAllItems } from "../controllers/items/items";
+import {
+  createItem,
+  GetAllItems,
+  GetSingleItem,
+  updateItem,
+} from "../controllers/items/items";
 import {
   createTableBilling,
   getFilteredTableBillings,
@@ -25,5 +30,7 @@ router.post("/updateUserAccount", addSalaryRecord);
 router.get("/getItems", GetAllItems);
 router.post("/addBilling", createTableBilling);
 router.post("/getBillings", getFilteredTableBillings);
+router.get("/getSingleItem/:id", GetSingleItem);
+router.post("/updateItems/", updateItem);
 
 export default router;

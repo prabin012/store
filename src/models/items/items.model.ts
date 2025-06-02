@@ -15,6 +15,18 @@ const ItemSchema = new Schema<ItemDocument>(
       ref: "Category",
       required: true,
     },
+    updateHistory: [
+      {
+        updatedAt: { type: Date, default: Date.now },
+        updatedFields: [
+          {
+            field: String,
+            oldValue: Schema.Types.Mixed,
+            newValue: Schema.Types.Mixed,
+          },
+        ],
+      },
+    ],
   },
   { timestamps: true }
 );

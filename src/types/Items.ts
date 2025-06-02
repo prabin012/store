@@ -7,6 +7,10 @@ export interface IItem {
   category?: Types.ObjectId;
   description?: string;
   imageUrl?: string;
+  updateHistory: {
+    updatedAt: Date;
+    updatedFields: string[];
+  }[];
 }
 
 interface IReservation extends Document {
