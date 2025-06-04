@@ -28,9 +28,8 @@ const userSchema = new Schema<IUserSchema>(
     },
     salaryHistory: [
       {
-        month: { type: String, required: true },
         amount: { type: Number, required: true },
-        paidDate: { type: Date, required: true },
+        paidDate: { type: String, required: true },
         status: { type: String, enum: ["Paid", "Pending"], default: "Paid" },
       },
     ],

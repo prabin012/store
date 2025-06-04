@@ -62,10 +62,9 @@ export const addSalaryRecord = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { userId } = req.params;
-    const { month, amount, paidDate, status } = req.body;
+    const { amount, paidDate, status, userId } = req.body;
 
-    if (!month || !amount || !paidDate) {
+    if (!amount || !paidDate) {
       res.status(400).json({
         success: false,
         message: "Month, amount, and paid date are required.",
@@ -80,7 +79,6 @@ export const addSalaryRecord = async (
     }
 
     user.salaryHistory.push({
-      month,
       amount,
       paidDate,
       status: status || "Paid",
@@ -118,6 +116,35 @@ export const GetAllUsers = async (
       success: true,
       message: "Users retrieved successfully.",
       data: users,
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error.",
+    });
+  }
+};
+export const GetUserDetails = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const getSingleUser = await UserModel.findById(id);
+
+    if (!getSingleUser) {
+      res.status(404).json({
+        success: false,
+        message: "No users found.",
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Users retrieved successfully.",
+      data: getSingleUser,
     });
   } catch (error) {
     console.error("Error fetching users:", error);

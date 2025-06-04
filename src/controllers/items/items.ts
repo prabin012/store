@@ -62,8 +62,7 @@ export const updateItem = async (
       });
       return;
     }
-    console.log(item);
-    console.log(quantity);
+
     const updatedFields: any = [];
     if (name && item.name !== name) {
       updatedFields.push({

@@ -1,5 +1,4 @@
 export interface ISalaryHistory {
-  month: string;
   amount: number;
   paidDate: Date;
   status?: "Paid" | "Pending";

@@ -1,3 +1,4 @@
+import { GetSingleUser } from "./../../../store/src/services/users/query";
 import express from "express";
 import {
   CreateCategory,
@@ -7,6 +8,7 @@ import {
   addSalaryRecord,
   createUser,
   GetAllUsers,
+  GetUserDetails,
 } from "../controllers/users/user";
 import {
   createItem,
@@ -31,6 +33,7 @@ router.get("/getItems", GetAllItems);
 router.post("/addBilling", createTableBilling);
 router.post("/getBillings", getFilteredTableBillings);
 router.get("/getSingleItem/:id", GetSingleItem);
+router.get("/getUserDetails/:id", GetUserDetails);
 router.post("/updateItems/", updateItem);
 
 export default router;
