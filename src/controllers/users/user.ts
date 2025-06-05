@@ -86,10 +86,15 @@ export const addSalaryRecord = async (
 
     await user.save();
 
+    const getSalary = {
+      salaryHistory: user.salaryHistory,
+      userId: user._id,
+    };
+
     res.status(200).json({
       success: true,
       message: "Salary record added successfully.",
-      data: user.salaryHistory,
+      data: getSalary,
     });
   } catch (error) {
     console.error("Error adding salary record:", error);
