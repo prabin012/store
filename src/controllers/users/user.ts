@@ -98,7 +98,9 @@ export const addSalaryRecord = async (
     });
   } catch (error) {
     console.error("Error adding salary record:", error);
-    res.status(500).json({ success: false, message: "Internal server error." });
+    res
+      .status(500)
+      .json({ success: false, message: "Internal server error..." });
   }
 };
 
