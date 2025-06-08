@@ -93,7 +93,7 @@ export const addSalaryRecord = async (
 
     res.status(200).json({
       success: true,
-      message: "Salary record added successfully...",
+      message: "Salary record added successfully.",
       data: getSalary,
     });
   } catch (error) {
